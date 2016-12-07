@@ -97,7 +97,7 @@ namespace AutoBroadcast
 					float[] Colour = new float[0];
 
 					if (Timeout(Start)) return;
-					if (broadcast == null || !broadcast.Enabled || (!broadcast.Groups.Contains(PlayerGroup)) && !broadcast.Groups.Contains("*")) continue;
+					if (broadcast == null || !broadcast.Enabled || (!broadcast.Groups.Contains(PlayerGroup) && !broadcast.Groups.Contains("*"))) continue;
 
                     string[] msgs = broadcast.Messages;
 
