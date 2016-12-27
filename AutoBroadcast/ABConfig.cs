@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 using System.IO;
-using Newtonsoft.Json;
-using TShockAPI;
 
 namespace AutoBroadcast
 {
@@ -20,30 +17,32 @@ namespace AutoBroadcast
 		{
 			if (!File.Exists(file))
 			{
-				ABConfig.WriteExample(file);
+				WriteExample(file);
 			}
 			return JsonConvert.DeserializeObject<ABConfig>(File.ReadAllText(file));
 		}
 
 		public static void WriteExample(string file)
 		{
-			var Ex = new Broadcast();
-			Ex.Name = "Example Broadcast";
-			Ex.Enabled = false;
-			Ex.Messages = new string[]
+			var Ex = new Broadcast()
 			{
-				"This is an example broadcast",
-				"It will broadcast every 5 minutes",
-				"Broadcasts can also execute commands",
-				"/time noon"
+				Name = "Example Broadcast",
+				Enabled = false,
+				Messages = new string[]
+				{
+					"This is an example broadcast",
+					"It will broadcast every 5 minutes",
+					"Broadcasts can also execute commands",
+					"/time noon"
+				},
+				ColorRGB = new float[] { 255f, 0f, 0f },
+				Interval = 300,
+				StartDelay = 60
 			};
-			Ex.ColorRGB = new float[] { 255f, 0f, 0f };
-			Ex.Interval = 300;
-			Ex.StartDelay = 60;
-
-			var Conf = new ABConfig();
-			Conf.Broadcasts = new Broadcast[] { Ex };
-
+			var Conf = new ABConfig()
+			{
+				Broadcasts = new Broadcast[] { Ex }
+			};
 			Conf.Write(file);
 		}
 	}
@@ -56,8 +55,8 @@ namespace AutoBroadcast
 		public float[] ColorRGB = new float[3];
 		public int Interval = 0;
 		public int StartDelay = 0;
-        public string[] TriggerRegions = new string[0];
-        public string RegionTrigger = "none";
+		public string[] TriggerRegions = new string[0];
+		public string RegionTrigger = "none";
 		public string[] Groups = new string[0];
 		public string[] TriggerWords = new string[0];
 		public bool TriggerToWholeGroup = false;
