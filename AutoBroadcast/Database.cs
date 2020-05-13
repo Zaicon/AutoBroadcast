@@ -70,7 +70,7 @@ namespace AutoBroadcast
 		{
 			string query = $"INSERT INTO `AutoBroadcast` (`Name`, `Enabled`, `Messages`, `Color`, `BroadcastInterval`, `StartDelay`, `TriggerRegions`, `RegionTriggerTo`, `Groups`, `TriggerWords`, `TriggerToWholeGroup`) " +
 							$"VALUES ('{name}', " +
-							$"'{enabled}', " +
+							$"'{(enabled ? 1 : 0)}', " +
 							$"'{string.Join(";", messages)}', " +
 							$"'{color}', " +
 							$"'{interval}', " +
